@@ -1,0 +1,14 @@
+@media (pointer: fine) {
+  #viewWorkButton:hover {
+    background-color: #00b3b3;
+    border-color: #00b3b3;
+  }
+}
+
+#viewWorkButton:focus {
+  outline: 0;
+}
+
+#viewWorkButton {
+  background-color: rgba(230, 255, 255, 0);
+}

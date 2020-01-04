@@ -1,0 +1,9 @@
+@media (pointer: fine) {
+  .navLink:hover {
+    color: yellow;
+  }
+}
+
+.navLink:focus {
+  outline: 0;
+}

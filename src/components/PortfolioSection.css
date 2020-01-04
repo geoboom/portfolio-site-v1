@@ -1,0 +1,10 @@
+@media (pointer: fine) {
+  .slick-arrow:hover {
+    color: grey;
+    opacity: 0.6;
+  }
+}
+
+.slick-arrow:focus {
+  outline: 0;
+}
