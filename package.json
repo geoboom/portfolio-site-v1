@@ -1,4 +1,5 @@
 {
+  "homepage": "https://geoboom.github.io/portfolio-v1",
   "name": "portfolio-v1",
   "version": "0.1.0",
   "private": true,
@@ -19,6 +20,8 @@
     "react-transition-group": "^4.3.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -46,6 +49,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "gh-pages": "^2.1.1",
     "prettier": "^1.19.1"
   }
 }

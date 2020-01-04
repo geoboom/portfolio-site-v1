@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import Scroll from 'react-scroll';
+import { useMediaQuery } from 'react-responsive';
 
 import './HeaderBar.css';
 
 const sections = [
   {
-    title: 'Home',
+    title: 'HOME',
     to: 'homeSection',
   },
   {
-    title: 'Portfolio',
+    title: 'PORTFOLIO',
     to: 'portfolioSection',
   },
   {
-    title: 'About',
+    title: 'ABOUT',
     to: 'aboutSection',
   },
   {
-    title: 'Contact',
+    title: 'CONTACT',
     to: 'contactSection',
   },
 ];
@@ -38,7 +39,7 @@ const NavItem = ({ title, to, active, handleSetActive, index }) => {
       <a
         className="navLink"
         style={{
-          padding: 5,
+          paddingRight: 40,
           cursor: 'pointer',
           ...(active ? { color: 'yellow' } : {}),
         }}
@@ -65,7 +66,7 @@ export class HeaderBar extends Component {
 
   render() {
     // eslint-disable-next-line react/prop-types
-    const { style } = this.props;
+    const { style, isDesktopOrLaptop } = this.props;
     const { currSection } = this.state;
 
     return (
@@ -74,24 +75,27 @@ export class HeaderBar extends Component {
           ...style,
           height: 50,
           width: '100%',
-          backgroundColor: '#5B1865',
+          backgroundColor: '#004080',
           fontSize: 20,
-          textAlign: 'center',
           color: 'white',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        {sections.map(({ title, to }, index) =>
-          NavItem({
-            title,
-            to,
-            active: currSection === to,
-            handleSetActive: this.handleSetActive,
-            index,
-          }),
-        )}
+        <div
+          style={{ width: isDesktopOrLaptop ? '60%' : '85%', paddingBottom: 3 }}
+        >
+          {sections.map(({ title, to }, index) =>
+            NavItem({
+              title,
+              to,
+              active: currSection === to,
+              handleSetActive: this.handleSetActive,
+              index,
+            }),
+          )}
+        </div>
       </div>
     );
   }

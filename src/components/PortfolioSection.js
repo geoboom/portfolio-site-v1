@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import Slider from 'react-slick';
-import { useMediaQuery } from 'react-responsive';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
 
 import writeups from './writeups';
@@ -129,39 +128,43 @@ const PortfolioItem = ({
     <div // wrapper
       style={{
         flex: 1,
-        flexDirection: isDesktopOrLaptop ? 'row' : 'column',
         display: 'flex',
-        width: isDesktopOrLaptop ? '60%' : '85%',
-        paddingBottom: isDesktopOrLaptop ? 100 : 60,
-        // backgroundColor,
+        width: '100%',
+        justifyContent: 'center',
+        // alignItems: 'center',
+        paddingTop: 90,
+        // paddingBottom: isDesktopOrLaptop ? 100 : 60,
+        paddingBottom: 90,
+        backgroundColor,
       }}
     >
-      {flipped && isDesktopOrLaptop ? (
-        <Fragment>
-          {render[0]}
-          {render[1]}
-        </Fragment>
-      ) : (
-        <Fragment>
-          {render[1]}
-          {render[0]}
-        </Fragment>
-      )}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: isDesktopOrLaptop ? 'row' : 'column',
+          width: isDesktopOrLaptop ? '60%' : '85%',
+        }}
+      >
+        {flipped && isDesktopOrLaptop ? (
+          <Fragment>
+            {render[0]}
+            {render[1]}
+          </Fragment>
+        ) : (
+          <Fragment>
+            {render[1]}
+            {render[0]}
+          </Fragment>
+        )}
+      </div>
     </div>
   );
 };
 
-const PortfolioSection = () => {
-  const isDesktopOrLaptop = useMediaQuery({
-    minWidth: 1224,
-  });
-
+const PortfolioSection = ({ isDesktopOrLaptop }) => {
   return (
     <div
       style={{
-        paddingTop: 90,
-        backgroundColor: '#e6e6ff',
-        // backgroundColor: 'white',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -170,7 +173,7 @@ const PortfolioSection = () => {
       {writeups.map((stuff, index) => (
         <PortfolioItem
           isDesktopOrLaptop={isDesktopOrLaptop}
-          backgroundColor="white"
+          backgroundColor={index % 2 ? '#e6e6e6' : 'white'}
           writeup={stuff}
           flipped={index % 2 == 1}
         />

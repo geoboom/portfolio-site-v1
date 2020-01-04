@@ -43,13 +43,20 @@ const TaskMe = () => (
 
 const ALPR = () => (
   <div>
-    <p>Automatic License Plate Recognition System.</p>
+    <p>
+      Automatic License Plate Recognition System. IP Camera facing the gantry
+      outputs video via RTSP stream which is read by the Raspberry PI. PI
+      analyzes video feed using openALPR daemon which pushes results to nodeJS
+      backend (also sitting on the PI) and triggers the barrier to open via GPIO
+      when car with whitelisted number plate is detected. Detections and barrier
+      triggers are stored in Redis sitting on the PI, limited to 5000 records.
+      Frontend dashboard also sits on the PI for admin to view the detection
+      logs in realtime and add/remove whitelisted number plates.
+    </p>
     <p>
       <h3 style={{ marginBottom: 5, fontWeight: 'normal' }}>Technology</h3>
-      AFB is built using React Native with a nodeJS backend to handle API
-      requests, and runs on Heroku. It is fully real-time via socket.io on the
-      frontend and backend encapsulating the websockets protocol. It uses
-      MongoDB and Redis to handle the database and session cache respectively.
+      Built using React, nodeJS, socket.io, etc like the above projects sitting
+      on a Raspberry PI 3.
     </p>
   </div>
 );
@@ -188,7 +195,7 @@ const writeups = [
     ],
   },
   {
-    title: 'ALPR Gantry System',
+    title: 'ALPR Barrier System',
     textContent: <ALPR />,
     visualContent: [
       <Fragment>
@@ -199,7 +206,21 @@ const writeups = [
           />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <p>Main dashboard view. Connected to internal nodeJS server.</p>
+          <p>
+            Main dashboard view. Connected to nodeJS server hosted on Raspberry
+            PI 3.
+          </p>
+        </div>
+      </Fragment>,
+      <Fragment>
+        <div style={styles.div}>
+          <img
+            style={styles.img2}
+            src={require('../assets/images/3-alpr/2.png')}
+          />
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <p>The physical setup with the camera aiming at the barrier.</p>
         </div>
       </Fragment>,
     ],

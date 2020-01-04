@@ -5,11 +5,16 @@ export class ContactSection extends Component {
     return (
       <div
         style={{
-          paddingTop: 50,
+          // paddingTop: 50,
           height: 1500,
           backgroundColor: 'green',
         }}
       >
+        <div style={{ textAlign: 'center', backgroundColor: 'red' }}>
+          <h1 style={{ margin: 0, color: 'white' }}>
+            SECTION UNDER CONSTRUCTION
+          </h1>
+        </div>
         <div
           style={{
             display: 'flex',

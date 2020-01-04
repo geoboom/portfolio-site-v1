@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import Scroll from 'react-scroll';
 import { StickyContainer, Sticky } from 'react-sticky';
+import { useMediaQuery } from 'react-responsive';
 import Slider from 'react-slick';
 
 import HomeSection from './components/HomeSection';
@@ -9,7 +10,7 @@ import PortfolioSection from './components/PortfolioSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 
-const HeaderBarSticky = () => {
+const HeaderBarSticky = ({ isDesktopOrLaptop }) => {
   const [navOpacity, setNavOpacity] = useState(0);
   const [topOffset, setTopOffset] = useState(0);
   const [top, setTop] = useState(-50);
@@ -39,8 +40,12 @@ const HeaderBarSticky = () => {
               zIndex: 2,
             }}
           >
-            <HeaderBar style={{ opacity: 1 - navOpacity }} />
             <HeaderBar
+              isDesktopOrLaptop={isDesktopOrLaptop}
+              style={{ opacity: 1 - navOpacity }}
+            />
+            <HeaderBar
+              isDesktopOrLaptop={isDesktopOrLaptop}
               style={{
                 position: 'fixed',
                 opacity: navOpacity,
@@ -57,15 +62,22 @@ const HeaderBarSticky = () => {
 
 // eslint-disable-next-line arrow-body-style
 const App = () => {
+  const isDesktopOrLaptop = useMediaQuery({
+    minWidth: 1224,
+  });
+
   return (
     <div>
+      <div style={{ textAlign: 'center', backgroundColor: 'red' }}>
+        <h1 style={{ margin: 0, color: 'white' }}>SITE UNDER CONSTRUCTION</h1>
+      </div>
       <Scroll.Element name="homeSection">
         <HomeSection />
       </Scroll.Element>
       <StickyContainer>
-        <HeaderBarSticky />
+        <HeaderBarSticky isDesktopOrLaptop={isDesktopOrLaptop} />
         <Scroll.Element name="portfolioSection">
-          <PortfolioSection />
+          <PortfolioSection isDesktopOrLaptop={isDesktopOrLaptop} />
         </Scroll.Element>
         <Scroll.Element name="aboutSection">
           <AboutSection />
