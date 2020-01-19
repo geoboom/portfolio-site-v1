@@ -49,7 +49,7 @@ const SampleNextArrow = props => {
   );
 };
 
-const VisualContent = ({ isDesktopOrLaptop, content }) => {
+const VisualContent = ({ content }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -82,47 +82,47 @@ const VisualContent = ({ isDesktopOrLaptop, content }) => {
   );
 };
 
-const TextContent = ({ isDesktopOrLaptop, title, content, flipped }) => (
-  <div
-    style={{
-      flex: 1,
-      marginTop: isDesktopOrLaptop ? 0 : 20,
-      marginLeft: isDesktopOrLaptop && !flipped ? 30 : 0,
-      marginRight: isDesktopOrLaptop && flipped ? 30 : 0,
-    }}
-  >
-    <h1
+const TextContent = ({ deviceType, title, content, flipped }) => {
+  const marginTop = {
+    desktop: 0,
+    tablet: 20,
+    mobile: 20,
+  };
+
+  return (
+    <div
       style={{
-        margin: 0,
-        fontSize: 22,
-        display: 'inline-block',
-        color: 'purple',
+        flex: 1,
+        marginTop: marginTop[deviceType],
+        marginLeft: deviceType === 'desktop' && !flipped ? 30 : 0,
+        marginRight: deviceType === 'desktop' && flipped ? 30 : 0,
       }}
     >
-      {title}
-    </h1>
-    <br />
-    {content}
-  </div>
-);
+      <h1
+        style={{
+          margin: 0,
+          fontSize: 22,
+          display: 'inline-block',
+          color: 'purple',
+        }}
+      >
+        {title}
+      </h1>
+      <br />
+      {content}
+    </div>
+  );
+};
 
-const PortfolioItem = ({
-  isDesktopOrLaptop,
-  flipped,
-  backgroundColor,
-  writeup,
-}) => {
+const PortfolioItem = ({ deviceType, flipped, backgroundColor, writeup }) => {
   const render = [
     <TextContent
-      isDesktopOrLaptop={isDesktopOrLaptop}
+      deviceType={deviceType}
       title={writeup.title}
       content={writeup.textContent}
       flipped={flipped}
     />,
-    <VisualContent
-      isDesktopOrLaptop={isDesktopOrLaptop}
-      content={writeup.visualContent}
-    />,
+    <VisualContent content={writeup.visualContent} />,
   ];
   return (
     <div // wrapper
@@ -141,11 +141,11 @@ const PortfolioItem = ({
       <div
         style={{
           display: 'flex',
-          flexDirection: isDesktopOrLaptop ? 'row' : 'column',
-          width: isDesktopOrLaptop ? '60%' : '85%',
+          flexDirection: deviceType === 'desktop' ? 'row' : 'column',
+          width: deviceType === 'desktop' ? '60%' : '85%',
         }}
       >
-        {flipped && isDesktopOrLaptop ? (
+        {flipped && deviceType === 'desktop' ? (
           <Fragment>
             {render[0]}
             {render[1]}
@@ -161,7 +161,7 @@ const PortfolioItem = ({
   );
 };
 
-const PortfolioSection = ({ isDesktopOrLaptop }) => {
+const PortfolioSection = ({ deviceType }) => {
   return (
     <div
       style={{
@@ -172,7 +172,7 @@ const PortfolioSection = ({ isDesktopOrLaptop }) => {
     >
       {writeups.map((stuff, index) => (
         <PortfolioItem
-          isDesktopOrLaptop={isDesktopOrLaptop}
+          deviceType={deviceType}
           backgroundColor={index % 2 ? '#e6e6e6' : 'white'}
           writeup={stuff}
           flipped={index % 2 == 1}

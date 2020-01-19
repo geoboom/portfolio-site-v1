@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Scroll from 'react-scroll';
-import { useMediaQuery } from 'react-responsive';
+import { slide as Menu } from 'react-burger-menu';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 import './HeaderBar.css';
 
@@ -39,7 +40,7 @@ const NavItem = ({ title, to, active, handleSetActive, index }) => {
       <a
         className="navLink"
         style={{
-          paddingRight: 40,
+          marginRight: 40,
           cursor: 'pointer',
           ...(active ? { color: 'yellow' } : {}),
         }}
@@ -66,8 +67,13 @@ export class HeaderBar extends Component {
 
   render() {
     // eslint-disable-next-line react/prop-types
-    const { style, isDesktopOrLaptop } = this.props;
+    const { style, deviceType } = this.props;
     const { currSection } = this.state;
+    const width = {
+      desktop: '60%',
+      tablet: '85%',
+      mobile: '85%',
+    };
 
     return (
       <div
@@ -78,24 +84,40 @@ export class HeaderBar extends Component {
           backgroundColor: '#004080',
           fontSize: 20,
           color: 'white',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          ...(deviceType !== 'mobile'
+            ? {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }
+            : {}),
         }}
       >
-        <div
-          style={{ width: isDesktopOrLaptop ? '60%' : '85%', paddingBottom: 3 }}
-        >
-          {sections.map(({ title, to }, index) =>
-            NavItem({
-              title,
-              to,
-              active: currSection === to,
-              handleSetActive: this.handleSetActive,
-              index,
-            }),
-          )}
-        </div>
+        {deviceType === 'mobile' ? (
+          <Menu customBurgerIcon={<GiHamburgerMenu />}>
+            {sections.map(({ title, to }, index) =>
+              NavItem({
+                title,
+                to,
+                active: currSection === to,
+                handleSetActive: this.handleSetActive,
+                index,
+              }),
+            )}
+          </Menu>
+        ) : (
+          <div style={{ width: width[deviceType], paddingBottom: 3 }}>
+            {sections.map(({ title, to }, index) =>
+              NavItem({
+                title,
+                to,
+                active: currSection === to,
+                handleSetActive: this.handleSetActive,
+                index,
+              }),
+            )}
+          </div>
+        )}
       </div>
     );
   }

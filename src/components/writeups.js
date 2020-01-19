@@ -34,9 +34,9 @@ const TaskMe = () => (
     </p>
     <p>
       <h3 style={{ marginBottom: 5, fontWeight: 'normal' }}>Technology</h3>
-      Similar to AFB, TaskMe is built using React Native with a nodeJS backend.
-      It uses socket.io and Google Firebase push notifications. It also uses
-      MongoDB (running on mlab) and Redis.
+      Similar to AFB, TaskMe is built using React Native (w/ Redux for state
+      management) with a nodeJS backend. It uses socket.io and Google Firebase
+      push notifications. It also uses MongoDB (running on mlab) and Redis.
     </p>
   </div>
 );
